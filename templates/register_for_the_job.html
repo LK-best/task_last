@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Регистрация работы</h1>
+    <form action="" method="post" class="mt-4">
+        {{ form.hidden_tag() }}
+        
+
+     
+        <div class="mb-3">
+            {{ form.job.label(class="form-label") }}
+            {{ form.job(class="form-control") }}
+        </div>
+       
+        <div class="mb-3">
+            {{ form.team_leader.label(class="form-label") }}
+            {{ form.team_leader(class="form-control", type="number", min="1") }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.work_size.label(class="form-label") }}
+            {{ form.work_size(class="form-control") }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.collaborators.label(class="form-label") }}
+            {{ form.collaborators(class="form-control") }}
+        </div>
+        
+        <div class="mb-3 form-check">
+            {{ form.is_finished(class="form-check-input") }}
+            {{ form.is_finished.label(class="form-check-label") }}
+        </div>
+        
+
+        <div class="mb-3">
+            {{ form.submit(class="btn btn-primary") }}
+            <a href="\info" class="btn btn-secondary">Перейти к работам</a>
+        </div>
+
+        {% if message %}
+            <div class="alert alert-danger">{{ message }}</div>
+        {% endif %}
+    </form>
+    
+</div>
+{% endblock %}

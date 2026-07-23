@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="alert alert-info">
+    Ваш ID: {{ current_user.id }} | Email: {{ current_user.email }}
+    </div>
+    <div class="mb-3">
+    <a href="/jobs" class="btn btn-secondary">Добавить работу</a>
+    <a href='/logout' class='btn btn-secondary'>Выйти</a>
+    <a href="/departments" class="btn btn-secondary">Перейти к депортаментам</a>
+    </div>
+    {% for job in jobs %}
+    
+    <div class="mb-4">
+        <h3>Action #{{ job.id }}</h3>
+        
+        <style>
+            .alert {
+                margin-bottom: 5px;
+                padding: 8px 15px;
+            }
+        </style>
+        
+        <table class="table border-0 w-100" style="border-spacing: 0; border-collapse: separate;">
+            
+            <tr>
+                <td class="p-0">
+                    <div class="alert alert-secondary" role="alert">
+                        Название
+                    </div>
+                </td>
+                <td class="p-0">
+                    <div class="alert alert-secondary" role="alert">
+                        Тим-лид
+                    </div>
+                </td>
+                <td class="p-0">
+                    <div class="alert alert-secondary" role="alert">
+                        Duration
+                    </div>
+                </td>
+                <td class="p-0">
+                    <div class="alert alert-secondary" role="alert">
+                        Collaborators
+                    </div>
+                </td>
+                <td class="p-0">
+                    <div class="alert alert-secondary" role="alert">
+                        is finished
+                    </div>
+                </td>
+                <td colspan="5" class="p-0">
+                    <div class="alert alert-secondary" role="alert">
+                        Категории
+                    </div>
+                </td>
+            </tr>
+            
+                
+            <tr>
+                <td class="p-0">
+                    <div class="alert alert-primary" role="alert">
+                        {{ job.job }}
+                    </div>
+                </td>
+                <td class="p-0">
+                    <div class="alert alert-primary" role="alert">
+                        {{ job.user.name }} {{ job.user.surname }}
+                    </div>
+                </td>
+                <td class="p-0">
+                    <div class="alert alert-primary" role="alert">
+                        {{ job.work_size }} ч.
+                    </div>
+                </td>
+                <td class="p-0">
+                    <div class="alert alert-primary" role="alert">
+                        {{ job.collaborators }}
+                    </div>
+                </td>
+                <td class="p-0">
+                    <div class="alert" style="background-color: pink; border-color: pink; color: black;" role="alert">
+                        {% if job.is_finished %}
+                            <span class="text-success">is finished</span>
+                        {% else %}
+                            <span class="text-danger">is not finished</span>
+                        {% endif %}
+                    </div>
+                </td>
+                <td class="p-0">
+                    <div class="alert alert-primary" role="alert">
+                        {% for category in job.categories %}
+                            {{ category.name }}{% if not loop.last %}, {% endif %}
+                        {% else %}
+                            Нет категорий
+                        {% endfor %}
+                    </div>
+                </td>
+                
+            </tr> 
+        </table>
+
+        {% if current_user.id == 1 or job.team_leader == current_user.id %}
+            <p>
+                <a href="/edit_job/{{ job.id }}" class="btn btn-warning">Редактировать</a>
+                <a href="/delete_job/{{ job.id }}" class="btn btn-danger">Удалить</a>
+            </p>
+        {% endif %}
+        
+    </div>
+    
+  
+
+    
+    {% endfor %}
+</div>
+{% endblock %}

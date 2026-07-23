@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Register Form</h1>
+    <form action="" method="post" class="mt-4">
+        {{ form.hidden_tag() }}
+        
+        <div class="mb-3">
+            {{ form.email.label(class="form-label") }}
+            {{ form.email(class="form-control", type="email") }}
+        </div>
+
+        
+            <div class="mb-3">
+                {{ form.password.label(class="form-label") }}
+                {{ form.password(class="form-control", type="password") }}
+            </div>
+            <div class="mb-3">
+                {{ form.password_again.label(class="form-label") }}
+                {{ form.password_again(class="form-control", type="password") }}
+            </div>
+        
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                {{ form.name.label(class="form-label") }}
+                {{ form.name(class="form-control") }}
+            </div>
+            <div class="col-md-6 mb-3">
+                {{ form.surname.label(class="form-label") }}
+                {{ form.surname(class="form-control") }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            {{ form.age.label(class="form-label") }}
+            {{ form.age(class="form-control", type="number", min="1") }}
+        </div>
+
+        
+        <div class="mb-3">
+            {{ form.position.label(class="form-label") }}
+            {{ form.position(class="form-control") }}
+        </div>
+        <div class="mb-3">
+            {{ form.speciality.label(class="form-label") }}
+            {{ form.speciality(class="form-control") }}
+        </div>
+        
+
+        <div class="mb-3">
+            {{ form.address.label(class="form-label") }}
+            {{ form.address(class="form-control") }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+
+        {% if message %}
+            <div class="alert alert-danger mt-3">{{ message }}</div>
+        {% endif %}
+    </form>
+</div>
+{% endblock %}
